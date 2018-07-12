@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
+import IsMusicPlaying from './IsMusicPlaying';
 
 class Album extends Component {
   constructor(props) {
@@ -12,42 +13,58 @@ class Album extends Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
-      isPlaying: false
+      isPlaying: false,
+      isHovered: false
     };
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
 
     this.handleSongClick = this.handleSongClick.bind(this);
+    this.hoverOnIt = this.hoverOnIt.bind(this);
+    this.hoverOffIt = this.hoverOffIt.bind(this);
 
   }
 
-  play() {
-    this.audioElement.play();
-    this.setState({ isPlaying: true });
-  }
-
-  pause() {
-    this.audioElement.pause();
-    this.setState({ isPlaying: false });
-  }   
-
-  setSong(song) {
-    this.audioElement.src = song.audioSrc;
-    this.setState({ currentSong: song });
-  }
-
-  handleSongClick(song) {
-    const isSameSong = this.state.currentSong === song;
-    if (this.state.isPlaying && isSameSong) {
-      this.pause();
-    } else {
-      if (!isSameSong) { this.setSong(song); } 
-      this.play();
+    play() {
+      this.audioElement.play();
+      this.setState({ isPlaying: true });
     }
+
+    pause() {
+      this.audioElement.pause();
+      this.setState({ isPlaying: false });
+    }   
+
+    setSong(song) {
+      this.audioElement.src = song.audioSrc;
+      this.setState({ currentSong: song });
+    }
+
+    handleSongClick(song) {
+      const isSameSong = this.state.currentSong === song;
+      if (this.state.isPlaying && isSameSong) {
+        this.pause();
+      } else {
+        if (!isSameSong) { this.setSong(song); } 
+        this.play();
+      }
+    }
+
+    hoverOnIt(song) {
+      const isSameNumber = this.state.currentSong === song;
+      if (isSameNumber) {
+        this.setState({ isHovered: true });
+      }
   }
 
+    hoverOffIt() {
+      this.setState({ isHovered: false });
+    }
+
+  
    render() {
+
      return (
        <section className="album">
         <section id="album-info">
@@ -71,7 +88,9 @@ class Album extends Component {
           <tbody>
             {this.state.album.songs.map( (song, index) =>
               <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                <td>{index+1}</td>
+                <td key={index} onMouseEnter={() => this.hoverOnIt(song)} onMouseLeave={this.hoverOffIt}>
+                    {this.state.isHovered ?  <IsMusicPlaying /> : <button>{index+1}</button> }
+                </td>
                 <td>{song.title}</td>
                 <td>{song.duration}</td>
               </tr>
