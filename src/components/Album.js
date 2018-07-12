@@ -95,7 +95,8 @@ class Album extends Component {
             {this.state.album.songs.map( (song, index) =>
               <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
                 <td key={index} onMouseEnter={() => this.hoverOnIt(index)} onMouseLeave={this.hoverOffIt}>
-                    {this.state.isHovered && this.state.currentIndexHovered === index ? <IsMusicPlaying /> : <button>{index+1}</button> }
+                    {this.state.isHovered && this.state.currentIndexHovered === index? <IsMusicPlaying isPlaying={this.state.isPlaying}/> : <button>{index+1}</button> }
+                   
                 </td>
                 <td>{song.title}</td>
                 <td>{song.duration}</td>
