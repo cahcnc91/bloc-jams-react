@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
-import IsMusicPlaying from './IsMusicPlaying';
+import IsMusicPlaying from './subcomponent/IsMusicPlaying';
 
 class Album extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       isPlaying: false,
-      isHovered: false
+      isHovered: false,
+      currentIndexHovered: -1
     };
 
     this.audioElement = document.createElement('audio');
@@ -51,18 +52,23 @@ class Album extends Component {
       }
     }
 
-    hoverOnIt(song) {
-      const isSameNumber = this.state.currentSong === song;
-      if (isSameNumber) {
-        this.setState({ isHovered: true });
+    hoverOnIt(index) {
+      const isSameNumber = this.state.album.songs[index];
+      if (isSameNumber) { 
+        this.setState({ 
+          isHovered: true,
+          currentIndexHovered: index 
+        });
       }
-  }
-
-    hoverOffIt() {
-      this.setState({ isHovered: false });
     }
 
-  
+    hoverOffIt() {
+      this.setState({ 
+        isHovered: false,
+        currentIndexHovered: -1
+        });
+    }
+
    render() {
 
      return (
@@ -88,8 +94,8 @@ class Album extends Component {
           <tbody>
             {this.state.album.songs.map( (song, index) =>
               <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                <td key={index} onMouseEnter={() => this.hoverOnIt(song)} onMouseLeave={this.hoverOffIt}>
-                    {this.state.isHovered ?  <IsMusicPlaying /> : <button>{index+1}</button> }
+                <td key={index} onMouseEnter={() => this.hoverOnIt(index)} onMouseLeave={this.hoverOffIt}>
+                    {this.state.isHovered && this.state.currentIndexHovered === index ? <IsMusicPlaying /> : <button>{index+1}</button> }
                 </td>
                 <td>{song.title}</td>
                 <td>{song.duration}</td>

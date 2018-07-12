@@ -3,17 +3,17 @@ import React, { Component } from 'react';
 class IsMusicPlaying extends Component {
 
   render () {
-    const isPlaying = this.props.isPlaying;
+    const isPlaying = false;
     let icon;
     if(isPlaying) {
-    icon = <h1>playing</h1>;
+    icon = <ion-icon name="pause"></ion-icon>;
     } else {
-    icon = <h2>paused</h2>;
+    icon = <ion-icon name="play"></ion-icon>;
     }
     
 
     return (
-      <div>
+      <div onClick={() => this.props.handleSongClick()}>
         {icon}
       </div>
     );
