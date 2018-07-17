@@ -100,6 +100,9 @@ class Album extends Component {
       const time = n;
       let minutes = parseInt(time/ 60);
       let seconds = parseInt( time% 60);
+      if (seconds < 10) {
+        return minutes + ' :0' + seconds;
+      }
       return minutes + ' : ' + seconds;
     }
 
@@ -160,7 +163,7 @@ class Album extends Component {
                     {this.state.isHovered && this.state.currentIndexHovered === index? <IsMusicPlaying isPlaying={this.state.isPlaying}/> : <button>{index+1}</button> }
                 </td>
                 <td>{song.title}</td>
-                <td>{song.duration}</td>
+                <td>{this.formatTime(song.duration)}</td>
               </tr>
               )
             }
