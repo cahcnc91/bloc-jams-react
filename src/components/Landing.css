@@ -1,0 +1,51 @@
+
+/*-------headings --------*/
+
+.title-box {
+    position: absolute;
+    width: 1140px;
+	text-transform: uppercase;
+	top: 15%;
+	left: 15%;
+}
+
+.title-box-right {
+    position: absolute;
+    width: 1140px;
+    top: 21%;
+    left: 20%;
+	text-transform: uppercase;
+}
+
+.selling-point-one {
+	position: absolute;
+    width: 1140px;
+    top: 29%;
+    left: 25%;
+	text-transform: uppercase;
+}
+
+.selling-points-two {
+	position: absolute;
+    width: 1140px;
+    top: 35%;
+    left: 15%;
+	margin-top: 3%;
+}
+
+.point {
+	padding-bottom: 25px;
+}
+
+.point h2{
+	padding-bottom: 2px;
+}
+
+.point p{
+	padding-bottom: 2px;
+}
+
+ion-icon {
+	color: white;
+	font-size: 20px;
+}
