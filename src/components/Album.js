@@ -142,7 +142,7 @@ class Album extends Component {
       <section className="album-page-container">
         <div className="header-album">
           <h3 id="album-title">{this.state.album.title}</h3>
-          <h3 id="artist-name">{this.state.album.artist}</h3>
+          <h5 id="artist-name">{this.state.album.artist}</h5>
           <h5 id="release-info">{this.state.album.releaseInfo}</h5>
         </div>
         <section id="container">
@@ -150,32 +150,32 @@ class Album extends Component {
             <img className="image-album" src={this.state.album.albumCover} alt={this.state.album.title} />  
             <div className="overlay" >
               <div className="album-info-text">
-                <h3>NOW PLAYING</h3>
+                <h5>NOW PLAYING</h5>
                 <h2 id="album-title">{this.state.album.title}</h2>
                 <h3 id="artist-name">{this.state.album.artist}</h3>
               </div>
             </div>
           </div>
           <div className="song-list">
-            <table>
-              <colgroup>
-                <col id="song-number-column" />
-                <col id="song-title-column" />
-                <col id="song-duration-column" />
-              </colgroup>  
-              <tbody>
-                {this.state.album.songs.map( (song, index) =>
-                <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                  <td key={index} onMouseEnter={() => this.hoverOnIt(index)} onMouseLeave={this.hoverOffIt}>
-                    {this.state.isHovered && this.state.currentIndexHovered === index? <IsMusicPlaying isPlaying={this.state.isPlaying}/> : <button>{index+1}</button> }
-                  </td>
-                  <td>{song.title}</td>
-                  <td>{this.formatTime(song.duration)}</td>
-                </tr>
-                )
-                }
-              </tbody>
-            </table>
+              <table>
+                <colgroup>
+                  <col id="song-number-column" />
+                  <col id="song-title-column" />
+                  <col id="song-duration-column" />
+                </colgroup>  
+                <tbody>
+                  {this.state.album.songs.map( (song, index) =>
+                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
+                      <td className="number-td" key={index} onMouseEnter={() => this.hoverOnIt(index)} onMouseLeave={this.hoverOffIt}>
+                        {this.state.isHovered && this.state.currentIndexHovered === index? <IsMusicPlaying isPlaying={this.state.isPlaying}/> : <div>{index+1}</div> }
+                      </td>
+                      <td className="title-td">{song.title}</td>
+                      <td className="duration-td" >{this.formatTime(song.duration)}</td>
+                  </tr>
+                  )
+                  }
+                </tbody>
+              </table>
           </div>
           <div className="playerbar">
             <PlayerBar 

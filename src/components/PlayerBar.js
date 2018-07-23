@@ -4,27 +4,27 @@ import './PlayerBar.css';
 class PlayerBar extends Component {
   render() {
     return (
-      <section>
+      <section className="player-bar-main-div">
 
         <div className='current-time-bar'>
           <input 
             type="range" 
-            className="slider" 
-            id="slider1"
+            className="slider-time" 
             value={(this.props.currentTime / this.props.duration) || 0} 
             max="1" 
             min="0" 
             step="0.001" 
             onChange={this.props.handleTimeChange}
+            id="my-range-time"
           /> 
         </div>
 
         <section className="playerbar-vbl">
           <div className="volume-control">
+          <ion-icon name="volume-low"></ion-icon>
             <input 
               type="range" 
-              orient="vertical"
-              className="slider" id="slider1"
+              className="slider-volume"
               value={this.props.volume} 
               min="0"
               max="1" 
