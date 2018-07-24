@@ -1,14 +1,12 @@
 import React from 'react';
 import './Landing.css';
-import Library from'./Library';
-import { Route, Link } from 'react-router-dom';
 
 const Landing = () => (
   <section className="landing">
     <div className="title-box">
       <h1>Bloc</h1>
     </div>
-    <div class="title-box-right">
+    <div className="title-box-right">
       <h1>Jams</h1>
     </div>
     <div className="selling-point-one">
